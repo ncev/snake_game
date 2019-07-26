@@ -10,8 +10,6 @@ int main()
     {
         fprintf(stdout,"Échec de l'initialisation de la SDL (%s)\n",SDL_GetError());
         return -1;
-    } else {
-
     }
 
     return 0;
