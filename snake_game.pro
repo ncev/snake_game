@@ -8,4 +8,8 @@ LIBS +=-L/SDL2-2.0.0/lib/x64 -lSDL2
 LIBS +=-L/SDL2-2.0.0/lib/x64 -lSDL2main
 
 SOURCES += \
+        game.cpp \
         main.cpp
+
+HEADERS += \
+    game.h
