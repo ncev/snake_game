@@ -1,9 +1,16 @@
 #include <iostream>
+#include <SDL2/SDL.h>
 
 using namespace std;
 
 int main()
 {
-    cout << "Hello World!" << endl;
+    /* Initialisation simple */
+    if (SDL_Init(SDL_INIT_VIDEO) != 0 )
+    {
+        fprintf(stdout,"Échec de l'initialisation de la SDL (%s)\n",SDL_GetError());
+        return -1;
+    }
+
     return 0;
 }
