@@ -3,9 +3,8 @@
 Apple::Apple(Coord max)
 {
     Random* rand = Random::get_instance();
-    coord.x = rand->generateBetweenNotEqualTo(0, 25, max.x / 2);
-    coord.y = rand->generateBetweenNotEqualTo(0, 19, max.y / 2);
-    cout << coord.x << endl;
+    coord.setX(rand->generateBetweenNotEqualTo(0, 25, max.getX() / 2));
+    coord.setY(rand->generateBetweenNotEqualTo(0, 19, max.getY() / 2));
 }
 
 Coord Apple::getCoord() {
