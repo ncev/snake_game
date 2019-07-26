@@ -1,7 +1,24 @@
 #include <iostream>
 #include <SDL2/SDL.h>
+#include "game.h"
 
 using namespace std;
+
+void sdl_loop_event(int* continuer, Game* game) {
+    SDL_Event event;
+    while (SDL_PollEvent(&event)) // Récupération des actions de l'utilisateur
+    {
+        switch(event.type)
+        {
+            case SDL_QUIT: // Clic sur la croix
+                *continuer = 0;
+                break;
+            default:
+                game->onEvent(event);
+                break;
+        }
+    }
+}
 
 int main()
 {
@@ -15,27 +32,21 @@ int main()
     {
        /* Création de la fenêtre */
        SDL_Window* pWindow = nullptr;
-       pWindow = SDL_CreateWindow("Ma première application SDL2",SDL_WINDOWPOS_UNDEFINED,
+       pWindow = SDL_CreateWindow("snake",SDL_WINDOWPOS_UNDEFINED,
                                                                  SDL_WINDOWPOS_UNDEFINED,
-                                                                 640,
-                                                                 480,
+                                                                 625,
+                                                                 475,
                                                                  SDL_WINDOW_SHOWN);
 
-       if( pWindow )
+       SDL_Renderer* renderer = SDL_CreateRenderer(pWindow, -1, SDL_RENDERER_ACCELERATED);
+       Game* game = new Game(renderer);
+
+       if(pWindow)
        {
            int continuer = 1;
-           SDL_Event event;
 
            while (continuer) {
-               while (SDL_PollEvent(&event)) // Récupération des actions de l'utilisateur
-               {
-                   switch(event.type)
-                   {
-                       case SDL_QUIT: // Clic sur la croix
-                           continuer = 0;
-                           break;
-                   }
-               }
+               sdl_loop_event(&continuer, game);
            }
        }
        else
@@ -43,6 +54,7 @@ int main()
            fprintf(stderr,"Erreur de création de la fenêtre: %s\n",SDL_GetError());
        }
        SDL_DestroyWindow(pWindow);
+       delete game;
    }
 
    SDL_Quit();

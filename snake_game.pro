@@ -8,8 +8,16 @@ LIBS +=-L/SDL2-2.0.0/lib/x64 -lSDL2
 LIBS +=-L/SDL2-2.0.0/lib/x64 -lSDL2main
 
 SOURCES += \
+        apple.cpp \
+        coord.cpp \
         game.cpp \
-        main.cpp
+        main.cpp \
+        random.cpp \
+        snake.cpp
 
 HEADERS += \
-    game.h
+    apple.h \
+    coord.h \
+    game.h \
+    random.h \
+    snake.h
