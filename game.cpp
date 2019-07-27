@@ -54,4 +54,7 @@ void Game::draw() {
     Coord coordApple = apple->getCoord();
     drawSquare(coordApple, 46, 204, 113);
     SDL_RenderPresent(renderer);
+
+    // dessin de la queue
+    /* à faire */
 }

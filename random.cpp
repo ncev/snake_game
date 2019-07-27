@@ -18,19 +18,3 @@ int Random::generateBetween(int min, int max) {
     random_variable = min + ( random_variable % ( max - min + 1 ) );
     return random_variable;
 }
-
-int Random::generateBetweenNotEqualTo(int min, int max, int nb[], int size) {
-    bool found = false;
-    int n = 0;
-    while (!found) {
-        n = generateBetween(min, max);
-        found = true;
-        for (int i = 0; i != size; i++) {
-            if (n == nb[i]) {
-                found = false;
-                break;
-            }
-        }
-    }
-    return n;
-}

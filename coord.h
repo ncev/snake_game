@@ -19,6 +19,8 @@ public:
     int getY();
     void setX(int x);
     void setY(int y);
+    static Coord* generateRandomCoord(Coord max);
+    static Coord* generateRandomCoordNotInCoords(Coord max, vector<Coord*>* coordsNotIn);
 };
 
 #endif // COORD_H

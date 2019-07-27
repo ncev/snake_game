@@ -34,3 +34,29 @@ void Coord::setX(int x_) {
 void Coord::setY(int y_) {
     *y = y_;
 }
+
+Coord* Coord::generateRandomCoord(Coord max) {
+    Random* rand = Random::get_instance();
+
+    int X = rand->generateBetween(0, max.getX());
+    int Y = rand->generateBetween(0, max.getY());
+
+    return new Coord(X, Y);
+}
+
+Coord* Coord::generateRandomCoordNotInCoords(Coord max, vector<Coord*>* coordsNotIn) {
+    bool found = false;
+    Coord* coord = nullptr;
+    while (!found) {
+        coord = generateRandomCoord(max);
+        found = true;
+        for (Coord* c : *coordsNotIn) {
+            if (coord->getX() == c->getX() && coord->getY() == c->getY()) {
+                found = false;
+                break;
+            }
+        }
+    }
+
+    return coord;
+}
