@@ -4,13 +4,16 @@ Game::Game(SDL_Renderer* renderer)
 {
     this->renderer = renderer;
     apple = nullptr;
-    max.setX(25);
-    max.setY(19);
+    snake = nullptr;
+
+    max = new Coord(25, 19);
     start();
 }
 
 Game::~Game() {
     delete apple;
+    delete snake;
+    delete max;
 }
 
 void Game::welcomePage() {
@@ -19,7 +22,8 @@ void Game::welcomePage() {
 }
 
 void Game::start() {
-    apple = new Apple(max);
+    snake = new Snake(max);
+    apple = new Apple(max, snake->getQueue());
     draw();
 }
 
@@ -28,19 +32,14 @@ void Game::onEvent(SDL_Event event) {
         case SDL_KEYUP:
             cout << static_cast<char>(event.key.keysym.sym) << endl;
             break;
-        case SDL_MOUSEBUTTONDOWN:
-            apple->getCoord().setX(0);
-            apple->getCoord().setY(0);
-            draw();
-            break;
     }
 }
 
 void Game::drawSquare(Coord coord, Uint8 r, Uint8 g, Uint8 b) {
     SDL_SetRenderDrawColor(renderer, r, g, b, 255);
     SDL_Rect rect;
-    rect.x = coord.getX() * max.getX();
-    rect.y = coord.getY() * max.getY();
+    rect.x = coord.getX() * max->getX();
+    rect.y = coord.getY() * max->getY();
     rect.w = 25;
     rect.h = 25;
     SDL_RenderFillRect(renderer, &rect);

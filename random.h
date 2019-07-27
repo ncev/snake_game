@@ -15,7 +15,7 @@ private:
 public:
     static Random* get_instance();
     int generateBetween(int min, int max);
-    int generateBetweenNotEqualTo(int min, int max, int nb);
+    int generateBetweenNotEqualTo(int min, int max, int nb[], int size);
 };
 
 #endif // RANDOM_H

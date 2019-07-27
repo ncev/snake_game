@@ -8,7 +8,7 @@ class Apple
 private:
     Coord coord;
 public:
-    Apple(Coord max);
+    Apple(Coord* max, vector<Coord*>* queue);
     Coord getCoord();
 };
 

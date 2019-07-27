@@ -8,8 +8,8 @@ Coord::Coord()
 
 Coord::Coord(int x, int y)
 {
-    *this->x = x;
-    *this->y = y;
+    this->x = new int(x);
+    this->y = new int(y);
 }
 
 Coord::~Coord()

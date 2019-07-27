@@ -3,6 +3,7 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 #include "apple.h"
+#include "snake.h"
 
 using namespace std;
 
@@ -10,8 +11,9 @@ class Game
 {
 private:
     Apple* apple;
+    Snake* snake;
     SDL_Renderer* renderer;
-    Coord max;
+    Coord* max;
 public:
     Game(SDL_Renderer* renderer);
     ~Game();
