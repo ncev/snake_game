@@ -20,6 +20,7 @@ private:
     pthread_t tid;
     int state_game;
     string keyboardTouch;
+    long cutTimer;
 public:
     Game(SDL_Renderer* renderer);
     ~Game();

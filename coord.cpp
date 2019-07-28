@@ -35,6 +35,11 @@ void Coord::setY(int y_) {
     *y = y_;
 }
 
+void Coord::copy(Coord* coord) {
+    *x = coord->getX();
+    *y = coord->getY();
+}
+
 Coord* Coord::generateRandomCoord(Coord max) {
     Random* rand = Random::get_instance();
 

@@ -7,6 +7,7 @@ Game::Game(SDL_Renderer* renderer)
     apple = nullptr;
     snake = nullptr;
     state_game = 0;
+    cutTimer = 0;
 
     max = new Coord(25, 19);
     welcomePage->showWelcomePage();
@@ -36,7 +37,8 @@ void Game::mainLoop(SDL_Event event) {
     clock_gettime(CLOCK_MONOTONIC_RAW, &tim);
     long sec = tim.tv_nsec / 100000000;
 
-    if (sec % 5 < 1) {
+    if (sec != cutTimer) {
+        cutTimer = sec;
         switch (state_game) {
             case 1:
                 run_game(sec);
@@ -45,8 +47,8 @@ void Game::mainLoop(SDL_Event event) {
     }
 }
 
-void Game::run_game(long) { // cette méthode s'execute toutes les 1 secondes
-    snake->loopMovement(keyboardTouch);
+void Game::run_game(long sec) { // cette méthode s'execute toutes les 1 secondes
+    snake->loopMovement(keyboardTouch, sec);
     draw();
 }
 
