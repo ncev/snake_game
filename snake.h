@@ -15,7 +15,7 @@ public:
     vector<Coord*>* getQueue();
     bool isEnded();
     void setEnded(bool end);
-    void loopMovement();
+    void loopMovement(string keyboardTouch);
 };
 
 #endif // SNAKE_H

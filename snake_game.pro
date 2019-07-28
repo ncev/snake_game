@@ -14,11 +14,13 @@ SOURCES += \
         game.cpp \
         main.cpp \
         random.cpp \
-        snake.cpp
+        snake.cpp \
+        welcomepage.cpp
 
 HEADERS += \
     apple.h \
     coord.h \
     game.h \
     random.h \
-    snake.h
+    snake.h \
+    welcomepage.h

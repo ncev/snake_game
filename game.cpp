@@ -1,28 +1,22 @@
 #include "game.h"
-#include <time.h>
 
 Game::Game(SDL_Renderer* renderer)
 {
     this->renderer = renderer;
+    welcomePage = new WelcomePage(renderer, this);
     apple = nullptr;
     snake = nullptr;
     seconds = -1;
     state_game = 0;
 
     max = new Coord(25, 19);
-    start();
+    welcomePage->showWelcomePage();
 }
 
 Game::~Game() {
     delete apple;
     delete snake;
     delete max;
-}
-
-void Game::welcomePage() {
-    state_game = 0;
-    SDL_SetRenderDrawColor(renderer, 52, 72, 94, 255);
-    SDL_RenderClear(renderer);
 }
 
 void Game::start() {
@@ -34,8 +28,8 @@ void Game::start() {
 
 void Game::mainLoop(SDL_Event event) {
     switch (event.type) {
-        case SDL_KEYUP:
-            cout << static_cast<char>(event.key.keysym.sym) << endl;
+        case SDL_KEYDOWN:
+            keyboardTouch = SDL_GetScancodeName(event.key.keysym.scancode);
             break;
     }
     time_t t = time(nullptr);
@@ -51,7 +45,7 @@ void Game::mainLoop(SDL_Event event) {
 }
 
 void Game::run_game() { // cette méthode s'execute toutes les 1 secondes
-    snake->loopMovement();
+    snake->loopMovement(keyboardTouch);
     draw();
 }
 

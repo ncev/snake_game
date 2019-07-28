@@ -19,8 +19,8 @@ Snake::~Snake() {
     delete queue;
 }
 
-void Snake::loopMovement() {
-    cout << "loop snake movement"<< endl;
+void Snake::loopMovement(string keyboardTouch) {
+    cout << keyboardTouch << endl;
 }
 
 vector<Coord*>* Snake::getQueue() {
