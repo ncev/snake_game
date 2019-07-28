@@ -13,11 +13,9 @@ void sdl_loop_event(int* continuer, Game* game) {
             case SDL_QUIT: // Clic sur la croix
                 *continuer = 0;
                 break;
-            default:
-                game->onEvent(event);
-                break;
         }
     }
+    game->mainLoop(event);
 }
 
 int main()
@@ -44,7 +42,6 @@ int main()
        if(pWindow)
        {
            int continuer = 1;
-
            while (continuer) {
                sdl_loop_event(&continuer, game);
            }

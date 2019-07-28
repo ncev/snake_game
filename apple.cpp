@@ -2,7 +2,8 @@
 
 Apple::Apple(Coord* max, vector<Coord*>* coords)
 {
-    Coord* cord = Coord::generateRandomCoordNotInCoords(*max, coords);
+    Coord tmpMax(max->getX() - 1, max->getY() - 1);
+    Coord* cord = Coord::generateRandomCoordNotInCoords(tmpMax, coords);
     coord = *cord;
 }
 

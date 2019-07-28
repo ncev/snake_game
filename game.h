@@ -14,15 +14,19 @@ private:
     Snake* snake;
     SDL_Renderer* renderer;
     Coord* max;
+    pthread_t tid;
+    int seconds;
+    int state_game;
 public:
     Game(SDL_Renderer* renderer);
     ~Game();
-    void onEvent(SDL_Event event);
+    void mainLoop(SDL_Event event);
     void drawApple();
     void drawSquare(Coord coord, Uint8 r, Uint8 g, Uint8 b);
     void draw();
     void start();
     void welcomePage();
+    void run_game();
 };
 
 #endif // GAME_H
