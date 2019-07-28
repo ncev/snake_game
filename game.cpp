@@ -6,7 +6,6 @@ Game::Game(SDL_Renderer* renderer)
     welcomePage = new WelcomePage(renderer, this);
     apple = nullptr;
     snake = nullptr;
-    seconds = -1;
     state_game = 0;
 
     max = new Coord(25, 19);
@@ -32,19 +31,21 @@ void Game::mainLoop(SDL_Event event) {
             keyboardTouch = SDL_GetScancodeName(event.key.keysym.scancode);
             break;
     }
-    time_t t = time(nullptr);
-    struct tm tm = *localtime(&t);
-    if (seconds != tm.tm_sec) {
-        seconds = tm.tm_sec;
+
+    struct timespec tim;
+    clock_gettime(CLOCK_MONOTONIC_RAW, &tim);
+    long sec = tim.tv_nsec / 100000000;
+
+    if (sec % 5 < 1) {
         switch (state_game) {
             case 1:
-                run_game();
+                run_game(sec);
                 break;
         }
     }
 }
 
-void Game::run_game() { // cette méthode s'execute toutes les 1 secondes
+void Game::run_game(long) { // cette méthode s'execute toutes les 1 secondes
     snake->loopMovement(keyboardTouch);
     draw();
 }

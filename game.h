@@ -2,7 +2,7 @@
 #define GAME_H
 #include <iostream>
 #include <SDL2/SDL.h>
-#include <time.h>
+#include <sys/time.h>
 #include "welcomepage.h"
 #include "apple.h"
 #include "snake.h"
@@ -18,7 +18,6 @@ private:
     SDL_Renderer* renderer;
     Coord* max;
     pthread_t tid;
-    int seconds;
     int state_game;
     string keyboardTouch;
 public:
@@ -29,7 +28,7 @@ public:
     void drawSquare(Coord coord, Uint8 r, Uint8 g, Uint8 b);
     void draw();
     void start();
-    void run_game();
+    void run_game(long sec);
 };
 
 #endif // GAME_H
