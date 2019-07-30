@@ -5,6 +5,8 @@
 Snake::Snake(Coord* max)
 {
     end = false;
+    requireIncreaseOnQueue = false;
+    apple = nullptr;
     queue = new vector<Coord*>();
     this->max = max;
     int X = max->getX() / 2;
@@ -29,7 +31,7 @@ Snake::~Snake() {
 
 void Snake::loopMovement(string queueChange, long) {
     if (queueChange != this->queueChange && queueMov.find(queueChange) != queueMov.end()) {
-        this->queueChange = queueChange;
+        updateQueueDir(queueChange);
     }
     if (queueChange != "") {
         updateQueuePos();
@@ -41,13 +43,50 @@ bool Snake::checkQueuePos() {
     int X = queue->at(0)->getX();
     int Y = queue->at(0)->getY();
 
-    return ((X >= max->getX() || Y >= 475 / max->getY()) || (X <= 0 || Y <= 0));
+    if ((X >= max->getX() || Y >= 475 / max->getY()) || (X < 0 || Y < 0)) {
+        return true;
+    }
+
+    for (unsigned int i = 1; i != queue->size(); i++) {
+        if (X == queue->at(i)->getX() && Y == queue->at(i)->getY()) {
+            return true;
+        }
+    }
+
+    Coord coord = apple->getCoord();
+    if (X == coord.getX() && Y == coord.getY()) {
+        apple->updateCoords(queue);
+        requireIncreaseOnQueue = true;
+    }
+    return false;
 }
 
 void Snake::updateQueuePos() {
     queue->erase(queue->begin() + 1);
     queue->push_back(new Coord(queue->at(0)->getX(), queue->at(0)->getY()));
     queueMov.at(queueChange)(queue->at(0));
+    if (requireIncreaseOnQueue) {
+        queue->push_back(new Coord(queue->at(queue->size() - 1)->getX(), queue->at(queue->size() - 1)->getY()));
+        requireIncreaseOnQueue = false;
+    }
+}
+
+void Snake::updateQueueDir(string queueChange) {
+    if ((queueChange == "Right" || queueChange == "Left") && (this->queueChange != "Right" && this->queueChange != "Left")) {
+        this->queueChange = queueChange;
+        return;
+    }
+    if ((queueChange == "Up" || queueChange == "Down") && (this->queueChange != "Up" && this->queueChange != "Down")) {
+        this->queueChange = queueChange;
+    }
+}
+
+int Snake::getScore() {
+    return static_cast<int>(queue->size() - 2);
+}
+
+void Snake::setApple(Apple *apple) {
+    this->apple = apple;
 }
 
 vector<Coord*>* Snake::getQueue() {

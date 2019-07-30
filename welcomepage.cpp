@@ -14,3 +14,11 @@ void WelcomePage::showWelcomePage() {
     SDL_RenderPresent(renderer);
     game->start();
 }
+
+void WelcomePage::showWelcomePage(int score) {
+    cout << "hey ! I'm the welcome page you score is of " << score << endl;
+    SDL_SetRenderDrawColor(renderer, 52, 72, 94, 255);
+    SDL_RenderClear(renderer);
+    SDL_RenderPresent(renderer);
+    game->start();
+}

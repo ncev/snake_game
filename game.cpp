@@ -24,6 +24,7 @@ void Game::start() {
     state_game = 1;
     snake = new Snake(max);
     apple = new Apple(max, snake->getQueue());
+    snake->setApple(apple);
     draw();
 }
 
@@ -54,10 +55,11 @@ void Game::run_game(long sec) { // cette méthode s'execute toutes les 1 seconde
         draw();
     else {
         state_game = 0;
+        int score = snake->getScore();
         delete snake;
         delete apple;
         keyboardTouch = "";
-        welcomePage->showWelcomePage();
+        welcomePage->showWelcomePage(score);
     }
 }
 

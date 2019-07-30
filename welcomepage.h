@@ -13,5 +13,6 @@ private:
 public:
     WelcomePage(SDL_Renderer* renderer, Game* game);
     void showWelcomePage();
+    void showWelcomePage(int score);
 };
 #endif // WELCOMEPAGE_H

@@ -1,12 +1,17 @@
 #include "apple.h"
 
-Apple::Apple(Coord* max, vector<Coord*>* coords)
+Apple::Apple(Coord* max, vector<Coord*>* queue)
 {
-    Coord tmpMax(max->getX() - 1, max->getY() - 1);
-    Coord* cord = Coord::generateRandomCoordNotInCoords(tmpMax, coords);
-    coord = *cord;
+    tmpMax = new Coord(max->getX() - 1, max->getY() - 1);
+    Coord* coord = Coord::generateRandomCoordNotInCoords(*tmpMax, queue);
+    this->coord = *coord;
 }
 
 Coord Apple::getCoord() {
     return coord;
+}
+
+void Apple::updateCoords(vector<Coord*>* queue) {
+    Coord* coord = Coord::generateRandomCoordNotInCoords(*tmpMax, queue);
+    this->coord = *coord;
 }
