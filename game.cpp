@@ -16,6 +16,7 @@ Game::Game(SDL_Renderer* renderer)
 Game::~Game() {
     delete apple;
     delete snake;
+    delete welcomePage;
     delete max;
 }
 
@@ -49,7 +50,15 @@ void Game::mainLoop(SDL_Event event) {
 
 void Game::run_game(long sec) { // cette méthode s'execute toutes les 1 secondes
     snake->loopMovement(keyboardTouch, sec);
-    draw();
+    if (!snake->isEnded())
+        draw();
+    else {
+        state_game = 0;
+        delete snake;
+        delete apple;
+        keyboardTouch = "";
+        welcomePage->showWelcomePage();
+    }
 }
 
 void Game::drawSquare(Coord coord, Uint8 r, Uint8 g, Uint8 b) {

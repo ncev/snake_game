@@ -8,6 +8,7 @@ WelcomePage::WelcomePage(SDL_Renderer* renderer, Game* game)
 }
 
 void WelcomePage::showWelcomePage() {
+    cout << "hey ! I'm the welcome page !" << endl;
     SDL_SetRenderDrawColor(renderer, 52, 72, 94, 255);
     SDL_RenderClear(renderer);
     SDL_RenderPresent(renderer);

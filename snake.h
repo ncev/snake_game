@@ -8,7 +8,7 @@ class Snake
 {
 private:
     vector<Coord*>* queue;
-    Coord max;
+    Coord* max;
     bool end;
     map<string, void (*) (Coord*)> queueMov;
     string queueChange;

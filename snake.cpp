@@ -6,6 +6,7 @@ Snake::Snake(Coord* max)
 {
     end = false;
     queue = new vector<Coord*>();
+    this->max = max;
     int X = max->getX() / 2;
     int Y = max->getY() / 2;
 
@@ -30,12 +31,17 @@ void Snake::loopMovement(string queueChange, long) {
     if (queueChange != this->queueChange && queueMov.find(queueChange) != queueMov.end()) {
         this->queueChange = queueChange;
     }
-    if (queueChange != "")
+    if (queueChange != "") {
         updateQueuePos();
+        end = checkQueuePos();
+    }
 }
 
 bool Snake::checkQueuePos() {
-    return true;
+    int X = queue->at(0)->getX();
+    int Y = queue->at(0)->getY();
+
+    return ((X >= max->getX() || Y >= 475 / max->getY()) || (X <= 0 || Y <= 0));
 }
 
 void Snake::updateQueuePos() {
