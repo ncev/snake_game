@@ -14,5 +14,7 @@ public:
     WelcomePage(SDL_Renderer* renderer, Game* game);
     void showWelcomePage();
     void showWelcomePage(int score);
+    void print();
+    void mainLoop(SDL_Event event);
 };
 #endif // WELCOMEPAGE_H

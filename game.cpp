@@ -29,9 +29,16 @@ void Game::start() {
 }
 
 void Game::mainLoop(SDL_Event event) {
+
+    if (state_game == 0) {
+        welcomePage->mainLoop(event);
+        return;
+    }
+
     switch (event.type) {
         case SDL_KEYDOWN:
-            keyboardTouch = SDL_GetScancodeName(event.key.keysym.scancode);
+            if (state_game)
+                keyboardTouch = SDL_GetScancodeName(event.key.keysym.scancode);
             break;
     }
 
@@ -41,11 +48,7 @@ void Game::mainLoop(SDL_Event event) {
 
     if (sec != cutTimer) {
         cutTimer = sec;
-        switch (state_game) {
-            case 1:
-                run_game(sec);
-                break;
-        }
+        run_game(sec);
     }
 }
 

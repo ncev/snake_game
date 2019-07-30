@@ -8,17 +8,25 @@ WelcomePage::WelcomePage(SDL_Renderer* renderer, Game* game)
 }
 
 void WelcomePage::showWelcomePage() {
-    cout << "hey ! I'm the welcome page !" << endl;
-    SDL_SetRenderDrawColor(renderer, 52, 72, 94, 255);
-    SDL_RenderClear(renderer);
-    SDL_RenderPresent(renderer);
-    game->start();
+    print();
 }
 
 void WelcomePage::showWelcomePage(int score) {
-    cout << "hey ! I'm the welcome page you score is of " << score << endl;
+    cout << "votre score est de " << score << endl;
+    print();
+}
+
+void WelcomePage::print() {
     SDL_SetRenderDrawColor(renderer, 52, 72, 94, 255);
     SDL_RenderClear(renderer);
     SDL_RenderPresent(renderer);
-    game->start();
+}
+
+void WelcomePage::mainLoop(SDL_Event event) {
+    switch (event.type) {
+        case SDL_MOUSEBUTTONDOWN:
+            cout << event.motion.x << endl;
+            game->start();
+            break;
+    }
 }
