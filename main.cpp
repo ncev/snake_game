@@ -27,6 +27,12 @@ int main()
         return -1;
     }
 
+    if(TTF_Init() == -1)
+    {
+        fprintf(stderr, "Erreur d'initialisation de TTF_Init : %s\n", TTF_GetError());
+        exit(EXIT_FAILURE);
+    }
+
     {
        /* Création de la fenêtre */
        SDL_Window* pWindow = nullptr;
@@ -55,6 +61,7 @@ int main()
    }
 
    SDL_Quit();
+   TTF_Quit();
 
     return 0;
 }
