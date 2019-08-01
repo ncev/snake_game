@@ -24,7 +24,7 @@ WelcomePage::WelcomePage(SDL_Renderer* renderer, Game* game)
 
     if(!police) {
         printf("TTF_OpenFont: %s\n", TTF_GetError());
-        // handle error
+        exit(EXIT_FAILURE);
     }
 
 }
@@ -41,6 +41,7 @@ void WelcomePage::showWelcomePage(int score) {
     string str_score = "votre score est de " + to_string(score);
     SDL_Surface* surfaceMessage = TTF_RenderText_Solid(police, str_score.c_str(), couleurNoire);
     SDL_Texture* scoreTexture = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
+    SDL_FreeSurface(surfaceMessage);
     print(scoreTexture);
 }
 
@@ -55,12 +56,14 @@ void WelcomePage::print(SDL_Texture* scoreTexture) {
 
     if (scoreTexture != nullptr) {
         SDL_RenderCopy(renderer, scoreTexture, nullptr, &scoreRect);
+        SDL_DestroyTexture(scoreTexture);
     }
 
     SDL_RenderPresent(renderer);
 
+    SDL_DestroyTexture(Message);
     SDL_FreeSurface(surfaceMessage);
-    free(Message);
+
 }
 
 void WelcomePage::mainLoop(SDL_Event event) {
