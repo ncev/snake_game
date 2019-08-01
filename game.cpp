@@ -61,6 +61,8 @@ void Game::run_game(long sec) { // cette méthode s'execute toutes les 1 seconde
         int score = snake->getScore();
         delete snake;
         delete apple;
+        snake = nullptr;
+        apple = nullptr;
         keyboardTouch = "";
         welcomePage->showWelcomePage(score);
     }
