@@ -5,7 +5,7 @@ WelcomePage::WelcomePage(SDL_Renderer* renderer, Game* game)
 {
     this->renderer = renderer;
     this->game = game;
-    police = TTF_OpenFont("angelina.ttf", 65);
+    police = TTF_OpenFont("font.ttf", 65);
     couleurNoire = {0, 0, 0, 0};
 
     int w, h;
